@@ -4,6 +4,7 @@
     {
         Sucess = 0,
         AlreadyLiked = 1,
-        AlredyDisliked = 2
+        AlredyDisliked = 2,
+        UserCannotDelete = 3,
     }
 }

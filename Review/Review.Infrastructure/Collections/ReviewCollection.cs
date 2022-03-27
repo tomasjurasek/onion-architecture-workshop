@@ -4,9 +4,8 @@ namespace Review.Infrastructure.Collections
 {
     internal class ReviewCollection : IReviewCollection
     {
-        public ReviewCollection(ReviewRefresher reviewRefresher)
+        public ReviewCollection()
         {
-            Task.Factory.StartNew(async () => await reviewRefresher.StartAsync(), TaskCreationOptions.LongRunning);
         }
 
         public Task<Domain.Models.Review> GetAsync(Guid id)

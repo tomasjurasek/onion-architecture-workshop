@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Review.Application.Enums;
 using Review.Domain;
-using Review.Domain.Exceptions;
 using Review.Domain.Services;
 
 namespace Review.Application.Services

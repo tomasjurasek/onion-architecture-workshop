@@ -1,9 +1,9 @@
 ﻿namespace Review.Domain.Models
 {
-    internal record Review
+    internal class Review
     {
-        public static Review Create(Guid id, Guid productId, Guid userId, string descrption, DateTime createdAt) => new(id, productId, userId, descrption, createdAt);
-        public static Review Create(Guid productId, Guid userId, string descrption) => new(Guid.NewGuid(), productId, userId, descrption, DateTime.UtcNow);
+        public static Review Create(Guid id, Guid productId, Guid userId, string descrption, ICollection<Like> likes, ICollection<Dislike> dislikes, DateTime createdAt) => new(id, productId, userId, descrption, likes, dislikes, createdAt);
+        public static Review Create(Guid productId, Guid userId, string descrption) => new(Guid.NewGuid(), productId, userId, descrption, Array.Empty<Like>(), Array.Empty<Dislike>(), DateTime.UtcNow);
 
         public Guid Id { get; }
         public Guid ProductId { get; }
@@ -12,17 +12,19 @@
         public DateTime CreatedAt { get; }
         public ICollection<Like> Likes { get; private set; }
         public ICollection<Dislike> Dislikes { get; private set; }
+        public bool IsActive { get; private set; }
 
 
-        internal Review(Guid id, Guid productId, Guid userId, string description, DateTime createdAt)
+        internal Review(Guid id, Guid productId, Guid userId, string description, ICollection<Like> likes, ICollection<Dislike> dislikes, DateTime createdAt)
         {
             Id = id;
             ProductId = productId;
             UserId = userId;
             Description = description;
             CreatedAt = createdAt;
-            Likes = new List<Like>();
-            Dislikes = new List<Dislike>();
+            Likes = likes;
+            Dislikes = dislikes;
+            IsActive = true;
         }
 
 
@@ -47,6 +49,17 @@
 
             Dislikes.Add(new Dislike(userId, DateTime.UtcNow));
 
+            return Result.Sucess;
+        }
+
+        internal Result Delete(Guid userId)
+        {
+            if(!UserId.Equals(userId))
+            {
+                return Result.UserCannotDelete;
+            }
+
+            IsActive = false;
             return Result.Sucess;
         }
     }
