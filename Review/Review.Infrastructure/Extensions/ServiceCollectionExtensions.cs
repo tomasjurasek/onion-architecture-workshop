@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Review.Application;
 using Review.Application.Queries;
 using Review.Domain.Services;
 using Review.Infrastructure;
@@ -13,6 +14,7 @@ namespace Review.Infastructure.Extensions
         {
             services.AddSingleton<IGetReviewsQuery, GetReviewQUery>();
             services.AddSingleton<IReviewCollection, ReviewCollection>();
+            services.AddSingleton<IMetric, Metric>();
             services.AddHostedService<ReviewRefresher>();
 
             return services;
