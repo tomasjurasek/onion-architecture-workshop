@@ -8,7 +8,6 @@ namespace Review.Application.Extensions
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddSingleton<IReviewService, ReviewService>();
-            services.AddSingleton<IReviewUpdater, ReviewUpdater>();
 
             return services;
         }

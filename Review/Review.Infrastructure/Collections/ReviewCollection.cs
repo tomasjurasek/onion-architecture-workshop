@@ -4,10 +4,6 @@ namespace Review.Infrastructure.Collections
 {
     internal class ReviewCollection : IReviewCollection
     {
-        public ReviewCollection()
-        {
-        }
-
         public Task<Domain.Models.Review> GetAsync(Guid id)
         {
             throw new NotImplementedException();
