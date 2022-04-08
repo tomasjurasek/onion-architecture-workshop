@@ -18,8 +18,9 @@
         public bool IsActive { get; private set; }
 
 
-        internal Review(Guid id, Guid productId, Guid userId, string description, IList<Like> likes, IList<Dislike> dislikes, DateTime createdAt)
+        public Review(Guid id, Guid productId, Guid userId, string description, IList<Like> likes, IList<Dislike> dislikes, DateTime createdAt)
         {
+            //TODO Validation
             Id = id;
             ProductId = productId;
             UserId = userId;
@@ -27,15 +28,21 @@
             CreatedAt = createdAt;
             _likes = likes;
             _dislikes = dislikes;
-            IsActive = true;
+            IsActive = true; // TODO input
         }
 
 
-        internal Result Like(Guid userId)
+        public Result Like(Guid userId)
         {
             if (Likes.Any(s => s.UserId.Equals(userId)))
             {
                 return Result.AlreadyLiked;
+            }
+
+            var dislike = _dislikes.FirstOrDefault(s => s.UserId.Equals(userId));
+            if (dislike is not null)
+            {
+                _dislikes.Remove(dislike);
             }
 
             _likes.Add(new Like(userId, DateTime.UtcNow));
@@ -43,11 +50,17 @@
             return Result.Sucess;
         }
 
-        internal Result Dislike(Guid userId)
+        public Result Dislike(Guid userId)
         {
             if (Dislikes.Any(s => s.UserId.Equals(userId)))
             {
                 return Result.AlredyDisliked;
+            }
+
+            var like = _likes.FirstOrDefault(s => s.UserId.Equals(userId));
+            if (like is not null)
+            {
+                _likes.Remove(like);
             }
 
             _dislikes.Add(new Dislike(userId, DateTime.UtcNow));
@@ -55,7 +68,7 @@
             return Result.Sucess;
         }
 
-        internal Result Delete(Guid userId)
+        public Result Delete(Guid userId)
         {
             if (!UserId.Equals(userId))
             {

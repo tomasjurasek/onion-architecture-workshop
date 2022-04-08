@@ -1,24 +1,61 @@
 ﻿using Microsoft.Extensions.Logging;
 using Review.Application.Enums;
+using Review.Application.Queries;
 using Review.Domain;
 using Review.Domain.Services;
 
 namespace Review.Application.Services
 {
-    internal class ReviewService : IReviewService
+    internal class ReviewFacade : IReviewFacade
     {
-        private readonly IReviewCollection _reviewCollection;
-        private readonly ILogger<ReviewService> _logger;
+        private readonly IReviewRepositories _reviewCollection;
+        private readonly ILogger<ReviewFacade> _logger;
         private readonly IMetric _metric;
+        private readonly IGetReviewsQuery _getReviewsQuery;
 
-        public ReviewService(IReviewCollection reviewCollection, ILogger<ReviewService> logger, IMetric metric)
+        public ReviewFacade(IReviewRepositories reviewCollection, 
+            ILogger<ReviewFacade> logger, 
+            IMetric metric,
+            IGetReviewsQuery getReviewsQuery)
         {
             _reviewCollection = reviewCollection;
             _logger = logger;
             _metric = metric;
+            _getReviewsQuery = getReviewsQuery;
         }
 
-        public async Task<ReviewOperationResult> Dislike(Guid reviewId, Guid userId)
+        public Task<ICollection<DTO.Review>> GetAsync(Guid productId) // TODO paging, logging,...
+        {
+            return _getReviewsQuery.Get(productId);
+        }
+
+        public async Task<ReviewOperationResult> DeleteAsync(Guid reviewId, Guid userId) 
+        {
+            try
+            {
+                var review = await _reviewCollection.GetAsync(reviewId);
+                var result = review.Delete(userId);
+                if (result == Result.Sucess)
+                {
+                    await _reviewCollection.UpsertAsync(review);
+                    _metric.Track("Review:Deleted");
+                    return ReviewOperationResult.Success;
+                }
+                else if (result == Result.UserCannotDelete)
+                {
+                    return ReviewOperationResult.Error;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, null);
+
+            }
+
+            return ReviewOperationResult.Error;
+        }
+
+        public async Task<ReviewOperationResult> DislikeAsync(Guid reviewId, Guid userId)
         {
             try
             {
@@ -44,7 +81,7 @@ namespace Review.Application.Services
             return ReviewOperationResult.Error;
         }
 
-        public async Task<ReviewOperationResult> Like(Guid reviewId, Guid userId)
+        public async Task<ReviewOperationResult> LikeAsync(Guid reviewId, Guid userId)
         {
             try
             {
@@ -70,7 +107,7 @@ namespace Review.Application.Services
             return ReviewOperationResult.Error;
         }
 
-        public async Task<ReviewOperationResult> Store(Guid productId, Guid userId, string description)
+        public async Task<ReviewOperationResult> StoreAsync(Guid productId, Guid userId, string description)
         {
             try
             {

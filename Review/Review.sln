@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Review.Infrastructure", "Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Review.Tests", "Review.Tests\Review.Tests.csproj", "{A2AE5335-B0D0-410E-8229-AB4CE5F43CD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Review.API", "Review.API\Review.API.csproj", "{EC9E96F3-5F7D-4897-8DF1-3BAA9EA339D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Review.API", "Review.API\Review.API.csproj", "{EC9E96F3-5F7D-4897-8DF1-3BAA9EA339D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

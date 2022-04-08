@@ -1,6 +1,6 @@
 ﻿namespace Review.Domain.Services
 {
-    internal interface IReviewCollection
+    internal interface IReviewRepositories
     {
         Task<Models.Review> GetAsync(Guid id);
         Task UpsertAsync(Models.Review review);

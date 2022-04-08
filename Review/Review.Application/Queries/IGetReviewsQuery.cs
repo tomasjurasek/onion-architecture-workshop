@@ -1,6 +1,6 @@
 ﻿namespace Review.Application.Queries
 {
-    public interface IGetReviewsQuery
+    internal interface IGetReviewsQuery
     {
         Task<ICollection<DTO.Review>> Get(Guid productId);
     }

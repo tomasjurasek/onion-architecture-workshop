@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="Review.Infrastructure" />
+		<InternalsVisibleTo Include="Review.ServiceCollection" />
 	</ItemGroup>
 
 </Project>

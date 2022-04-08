@@ -1,13 +1,9 @@
 ﻿using Review.Domain.Services;
 
-namespace Review.Infrastructure.Collections
+namespace Review.Infrastructure.Repositories
 {
-    internal class ReviewCollection : IReviewCollection
+    internal class ReviewRepository : IReviewRepositories
     {
-        public ReviewCollection()
-        {
-        }
-
         public Task<Domain.Models.Review> GetAsync(Guid id)
         {
             throw new NotImplementedException();
