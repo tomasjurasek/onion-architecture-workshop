@@ -8,16 +8,17 @@ namespace Review.API.Controllers
     [Route("[controller]")]
     public class ReviewsController : ControllerBase
     {
-
         private readonly ILogger<ReviewsController> _logger;
         private readonly IReviewFacade _reviewService;
         private readonly ILoggedUserProvider _loggedUserProvider;
+        private readonly IGetReviewsQuery _getReviewsQuery;
 
         public ReviewsController(ILogger<ReviewsController> logger, IReviewFacade reviewService, ILoggedUserProvider loggedUserProvider)
         {
             _logger = logger;
             _reviewService = reviewService;
             _loggedUserProvider = loggedUserProvider;
+            _getReviewsQuery = getReviewsQuery;
         }
 
         [HttpPost]

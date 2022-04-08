@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Review.Application;
 using Review.Application.Queries;
 using Review.Domain.Services;
 using Review.Infrastructure;
