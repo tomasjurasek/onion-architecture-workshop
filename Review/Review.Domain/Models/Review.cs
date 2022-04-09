@@ -2,8 +2,8 @@
 {
     internal class Review
     {
-        public static Review Create(Guid id, Guid productId, Guid userId, string descrption, IList<Like> likes, IList<Dislike> dislikes, DateTime createdAt) => new(id, productId, userId, descrption, likes, dislikes, createdAt);
-        public static Review Create(Guid productId, Guid userId, string descrption) => new(Guid.NewGuid(), productId, userId, descrption, Array.Empty<Like>(), Array.Empty<Dislike>(), DateTime.UtcNow);
+        public static Review Create(Guid id, Guid productId, Guid userId, string descrption, IList<Like> likes, IList<Dislike> dislikes, DateTime createdAt, bool isActive) => new(id, productId, userId, descrption, likes, dislikes, createdAt, isActive);
+        public static Review Create(Guid productId, Guid userId, string descrption) => new(Guid.NewGuid(), productId, userId, descrption, Array.Empty<Like>(), Array.Empty<Dislike>(), DateTime.UtcNow, true);
 
         public Guid Id { get; }
         public Guid ProductId { get; }
@@ -18,9 +18,12 @@
         public bool IsActive { get; private set; }
 
 
-        public Review(Guid id, Guid productId, Guid userId, string description, IList<Like> likes, IList<Dislike> dislikes, DateTime createdAt)
+        public Review(Guid id, Guid productId, Guid userId, string description, IList<Like> likes, IList<Dislike> dislikes, DateTime createdAt, bool isActive)
         {
-            //TODO Validation
+            ArgumentNullException.ThrowIfNull(description); // TODO OrEmpty
+            ArgumentNullException.ThrowIfNull(likes);
+            ArgumentNullException.ThrowIfNull(dislikes);
+
             Id = id;
             ProductId = productId;
             UserId = userId;
@@ -28,7 +31,7 @@
             CreatedAt = createdAt;
             _likes = likes;
             _dislikes = dislikes;
-            IsActive = true; // TODO input
+            IsActive = isActive; 
         }
 
 
