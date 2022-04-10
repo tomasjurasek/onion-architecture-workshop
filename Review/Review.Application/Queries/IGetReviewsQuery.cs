@@ -2,6 +2,6 @@
 {
     internal interface IGetReviewsQuery
     {
-        Task<ICollection<DTO.Review>> Get(Guid productId);
+        Task<ICollection<Contracts.DTO.Review>> Get(Guid productId);
     }
 }

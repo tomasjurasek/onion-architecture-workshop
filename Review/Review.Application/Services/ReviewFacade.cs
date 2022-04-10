@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Review.Application.Enums;
+using Review.Application.Contracts;
 using Review.Application.Queries;
 using Review.Domain;
 using Review.Domain.Services;
@@ -13,8 +13,8 @@ namespace Review.Application.Services
         private readonly IMetric _metric;
         private readonly IGetReviewsQuery _getReviewsQuery;
 
-        public ReviewFacade(IReviewRepositories reviewCollection, 
-            ILogger<ReviewFacade> logger, 
+        public ReviewFacade(IReviewRepositories reviewCollection,
+            ILogger<ReviewFacade> logger,
             IMetric metric,
             IGetReviewsQuery getReviewsQuery)
         {
@@ -24,12 +24,12 @@ namespace Review.Application.Services
             _getReviewsQuery = getReviewsQuery;
         }
 
-        public Task<ICollection<DTO.Review>> GetAsync(Guid productId) // TODO paging, logging,...
+        public Task<ICollection<Contracts.DTO.Review>> GetAsync(Guid productId) // TODO paging, logging,...
         {
             return _getReviewsQuery.Get(productId);
         }
 
-        public async Task<ReviewOperationResult> DeleteAsync(Guid reviewId, Guid userId) 
+        public async Task<ReviewOperationResult> DeleteAsync(Guid reviewId, Guid userId)
         {
             try
             {

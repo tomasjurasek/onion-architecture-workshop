@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Review.Application\Review.Application.csproj" />
-    <ProjectReference Include="..\Review.Infrastructure\Review.Infrastructure.csproj" />
+    <ProjectReference Include="..\Review.Application.Contracts\Review.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Review.DependencyInjection\Review.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>

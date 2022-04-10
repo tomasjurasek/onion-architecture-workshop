@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Review.Application.Contracts;
 using Review.Application.Services;
 
 namespace Review.Application.Extensions

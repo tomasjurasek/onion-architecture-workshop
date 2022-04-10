@@ -1,4 +1,4 @@
-﻿namespace Review.Application.Enums
+﻿namespace Review.Application.Contracts
 {
     public enum ReviewOperationResult
     {
