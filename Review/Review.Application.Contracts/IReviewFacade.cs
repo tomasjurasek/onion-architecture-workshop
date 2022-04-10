@@ -1,6 +1,4 @@
-﻿using Review.Application.Enums;
-
-namespace Review.Application.Services
+﻿namespace Review.Application.Contracts
 {
     public interface IReviewFacade
     {

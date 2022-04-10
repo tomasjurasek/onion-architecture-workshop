@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Review.API.DTO;
-using Review.Application.Services;
+using Review.Application.Contracts;
 
 namespace Review.API.Controllers
 {
@@ -11,21 +11,19 @@ namespace Review.API.Controllers
         private readonly ILogger<ReviewsController> _logger;
         private readonly IReviewFacade _reviewService;
         private readonly ILoggedUserProvider _loggedUserProvider;
-        private readonly IGetReviewsQuery _getReviewsQuery;
 
         public ReviewsController(ILogger<ReviewsController> logger, IReviewFacade reviewService, ILoggedUserProvider loggedUserProvider)
         {
             _logger = logger;
             _reviewService = reviewService;
             _loggedUserProvider = loggedUserProvider;
-            _getReviewsQuery = getReviewsQuery;
         }
 
         [HttpPost]
         public async Task<IActionResult> StoreAsync([FromBody] StoreReviewRequest model)
         {
             var result = await _reviewService.StoreAsync(model.ProductId, _loggedUserProvider.UserId, model.Description);
-            if (result == Application.Enums.ReviewOperationResult.Success)
+            if (result == ReviewOperationResult.Success)
             {
                 return Ok();
             }
@@ -37,11 +35,11 @@ namespace Review.API.Controllers
         public async Task<IActionResult> DeleteAsync(Guid reviewId)
         {
             var result = await _reviewService.DeleteAsync(reviewId, _loggedUserProvider.UserId);
-            if (result == Application.Enums.ReviewOperationResult.Success)
+            if (result == ReviewOperationResult.Success)
             {
                 return Ok();
             }
-            else if (result == Application.Enums.ReviewOperationResult.Error)
+            else if (result == ReviewOperationResult.Error)
             {
                 return BadRequest();
             }
@@ -54,11 +52,11 @@ namespace Review.API.Controllers
         public async Task<IActionResult> LikeAsync(Guid reviewId)
         {
             var result = await _reviewService.LikeAsync(reviewId, _loggedUserProvider.UserId);
-            if (result == Application.Enums.ReviewOperationResult.Success)
+            if (result == ReviewOperationResult.Success)
             {
                 return Ok();
             }
-            else if (result == Application.Enums.ReviewOperationResult.AlreadyLiked)
+            else if (result == ReviewOperationResult.AlreadyLiked)
             {
                 return BadRequest();
             }
@@ -70,11 +68,11 @@ namespace Review.API.Controllers
         public async Task<IActionResult> DislikeAsync(Guid reviewId)
         {
             var result = await _reviewService.DislikeAsync(reviewId, _loggedUserProvider.UserId);
-            if (result == Application.Enums.ReviewOperationResult.Success)
+            if (result == ReviewOperationResult.Success)
             {
                 return Ok();
             }
-            else if (result == Application.Enums.ReviewOperationResult.AlreadyDisliked)
+            else if (result == ReviewOperationResult.AlreadyDisliked)
             {
                 return BadRequest();
             }
