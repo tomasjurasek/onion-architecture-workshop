@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Review.Application.Contracts\Review.Application.Contracts.csproj" />
     <ProjectReference Include="..\Review.Domain\Review.Domain.csproj" />
 	<InternalsVisibleTo Include="Review.Infrastructure" />
   </ItemGroup>

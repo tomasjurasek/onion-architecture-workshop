@@ -1,4 +1,4 @@
-﻿namespace Review.Application
+﻿namespace Review.Application.Contracts
 {
     internal interface IMetric
     {

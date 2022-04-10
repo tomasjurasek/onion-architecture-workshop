@@ -1,4 +1,4 @@
-﻿using Review.Application;
+﻿using Review.Application.Contracts;
 
 namespace Review.Infrastructure
 {

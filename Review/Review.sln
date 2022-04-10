@@ -13,10 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Review.Tests", "Review.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Review.API", "Review.API\Review.API.csproj", "{EC9E96F3-5F7D-4897-8DF1-3BAA9EA339D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Review.Application.Contracts", "Review.Application.Contracts\Review.Application.Contracts.csproj", "{5BA54ABA-954F-4104-8F23-B6DDDF2D26AD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Review.DependencyInjection", "Review.DependencyInjection\Review.DependencyInjection.csproj", "{F37EC44F-F6C7-45FC-A411-A4C761624AC5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,14 +39,6 @@ Global
 		{EC9E96F3-5F7D-4897-8DF1-3BAA9EA339D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC9E96F3-5F7D-4897-8DF1-3BAA9EA339D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC9E96F3-5F7D-4897-8DF1-3BAA9EA339D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BA54ABA-954F-4104-8F23-B6DDDF2D26AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BA54ABA-954F-4104-8F23-B6DDDF2D26AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BA54ABA-954F-4104-8F23-B6DDDF2D26AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BA54ABA-954F-4104-8F23-B6DDDF2D26AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F37EC44F-F6C7-45FC-A411-A4C761624AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F37EC44F-F6C7-45FC-A411-A4C761624AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F37EC44F-F6C7-45FC-A411-A4C761624AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F37EC44F-F6C7-45FC-A411-A4C761624AC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

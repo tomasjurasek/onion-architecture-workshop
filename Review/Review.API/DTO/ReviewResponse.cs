@@ -2,9 +2,9 @@
 {
     public record ReviewResponse
     {
-        public Guid Id { get; set; }
-        public string Description { get; set; }
-        public int Likes { get; set; }
-        public int Dislikes { get; set; }
+        public Guid Id { get; init; }
+        public string Description { get; init; }
+        public int Likes { get; init; }
+        public int Dislikes { get; init; }
     }
 }

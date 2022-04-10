@@ -5,9 +5,9 @@ namespace Review.API.DTO
     public record ReviewRequest
     {
         [Required]
-        public Guid ProductId { get; set; }
+        public Guid ProductId { get; init; }
 
         [Required]
-        public string Description { get; set; }
+        public string Description { get; init; }
     }
 }

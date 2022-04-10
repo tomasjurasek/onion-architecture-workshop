@@ -24,7 +24,7 @@ namespace Review.Application.Services
             _getReviewsQuery = getReviewsQuery;
         }
 
-        public Task<ICollection<Contracts.DTO.Review>> GetAsync(Guid productId) // TODO paging, logging,...
+        public Task<ICollection<DTO.Review>> GetAsync(Guid productId) // TODO paging, logging,...
         {
             return _getReviewsQuery.Get(productId);
         }

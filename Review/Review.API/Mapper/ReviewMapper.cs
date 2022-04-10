@@ -4,7 +4,7 @@ namespace Review.API.Mapper
 {
     public static class ReviewMapper
     {
-        public static ReviewResponse Map(this Application.Contracts.DTO.Review dto) => new()
+        public static ReviewResponse Map(this Application.DTO.Review dto) => new()
         {
             Description = dto.Description,
             Dislikes = dto.Dislikes,
