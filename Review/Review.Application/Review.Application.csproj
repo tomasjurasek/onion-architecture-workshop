@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Review.Domain\Review.Domain.csproj" />
 	<InternalsVisibleTo Include="Review.Infrastructure" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
 </Project>

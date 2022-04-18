@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Review.Application;
-using Review.Application.Queries;
-using Review.Domain.Services;
+using Review.Application.Conracts;
+using Review.Domain.Contracts;
 using Review.Infrastructure;
 using Review.Infrastructure.Queries;
 using Review.Infrastructure.Repositories;

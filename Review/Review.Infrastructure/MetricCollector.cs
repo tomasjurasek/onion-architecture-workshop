@@ -1,8 +1,8 @@
-﻿using Review.Application.Contracts;
+﻿using Review.Domain.Contracts;
 
 namespace Review.Infrastructure
 {
-    internal class Metric : IMetric
+    internal class MetricCollector : IMetricCollector
     {
         public void Track(string metricName)
         {

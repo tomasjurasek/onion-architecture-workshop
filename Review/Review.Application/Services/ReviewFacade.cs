@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using Review.Application.Conracts;
 using Review.Application.Contracts;
-using Review.Application.Queries;
 using Review.Domain;
-using Review.Domain.Services;
+using Review.Domain.Contracts;
 
 namespace Review.Application.Services
 {
@@ -10,12 +10,12 @@ namespace Review.Application.Services
     {
         private readonly IReviewRepositories _reviewCollection;
         private readonly ILogger<ReviewFacade> _logger;
-        private readonly IMetric _metric;
+        private readonly IMetricCollector _metric;
         private readonly IGetReviewsQuery _getReviewsQuery;
 
         public ReviewFacade(IReviewRepositories reviewCollection,
             ILogger<ReviewFacade> logger,
-            IMetric metric,
+            IMetricCollector metric,
             IGetReviewsQuery getReviewsQuery)
         {
             _reviewCollection = reviewCollection;
@@ -111,7 +111,7 @@ namespace Review.Application.Services
         {
             try
             {
-                var review = Domain.Models.Review.Create(productId, userId, description);
+                var review = Domain.Entities.Review.Create(productId, userId, description);
 
                 await _reviewCollection.UpsertAsync(review);
                 _metric.Track("Review:Stored");

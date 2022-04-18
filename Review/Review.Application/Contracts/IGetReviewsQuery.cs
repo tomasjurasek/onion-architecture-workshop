@@ -1,4 +1,4 @@
-﻿namespace Review.Application.Queries
+﻿namespace Review.Application.Conracts
 {
     internal interface IGetReviewsQuery
     {

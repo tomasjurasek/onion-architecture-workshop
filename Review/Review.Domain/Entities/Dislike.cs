@@ -1,4 +1,4 @@
-﻿namespace Review.Domain.Models
+﻿namespace Review.Domain.Entities
 {
     internal record Dislike(Guid UserId, DateTime CreatedAt);
 }

@@ -1,15 +1,15 @@
-﻿using Review.Domain.Services;
+﻿using Review.Domain.Contracts;
 
 namespace Review.Infrastructure.Repositories
 {
     internal class ReviewRepository : IReviewRepositories
     {
-        public Task<Domain.Models.Review> GetAsync(Guid id)
+        public Task<Domain.Entities.Review> GetAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpsertAsync(Domain.Models.Review review)
+        public Task UpsertAsync(Domain.Entities.Review review)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿using Review.Application.Queries;
+﻿using Review.Application.Conracts;
 
 namespace Review.Infrastructure.Queries
 {

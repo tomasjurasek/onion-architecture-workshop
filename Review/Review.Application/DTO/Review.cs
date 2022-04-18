@@ -16,6 +16,6 @@
         public string Description { get; }
         public int Likes { get; }
         public int Dislikes { get; }
-        public Guid UserId { get; set; }
+        public Guid UserId { get; }
     }
 }
