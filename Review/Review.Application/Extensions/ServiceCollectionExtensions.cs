@@ -8,7 +8,7 @@ namespace Review.Application.Extensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddSingleton<IReviewFacade, ReviewFacade>();
+            services.AddScoped<IReviewFacade, ReviewFacade>();
 
             return services;
         }

@@ -2,11 +2,8 @@
 
 namespace Review.API.DTO
 {
-    public record StoreReviewRequest
+    public record ReviewInsertRequest
     {
-        [Required]
-        public Guid ProductId { get; init; }
-
         [Required]
         public string Description { get; init; }
     }

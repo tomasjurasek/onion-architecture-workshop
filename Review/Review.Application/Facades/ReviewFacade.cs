@@ -1,40 +1,35 @@
 ﻿using Microsoft.Extensions.Logging;
-using Review.Application.Conracts;
 using Review.Application.Contracts;
 using Review.Domain;
 using Review.Domain.Contracts;
+using Review.Domain.Entities;
 
 namespace Review.Application.Services
 {
     internal class ReviewFacade : IReviewFacade
     {
-        private readonly IReviewRepositories _reviewCollection;
+        private readonly IReviewRepository _reviewCollection;
         private readonly ILogger<ReviewFacade> _logger;
         private readonly IMetricCollector _metric;
-        private readonly IGetReviewsQuery _getReviewsQuery;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
-        public ReviewFacade(IReviewRepositories reviewCollection,
+        public ReviewFacade(IReviewRepository reviewCollection,
             ILogger<ReviewFacade> logger,
             IMetricCollector metric,
-            IGetReviewsQuery getReviewsQuery)
+            IDateTimeProvider dateTimeProvider)
         {
             _reviewCollection = reviewCollection;
             _logger = logger;
             _metric = metric;
-            _getReviewsQuery = getReviewsQuery;
+            _dateTimeProvider = dateTimeProvider;
         }
 
-        public Task<ICollection<DTO.Review>> GetAsync(Guid productId) // TODO paging, logging,...
-        {
-            return _getReviewsQuery.Get(productId);
-        }
-
-        public async Task<ReviewOperationResult> DeleteAsync(Guid reviewId, Guid userId)
+        public async Task<ReviewOperationResult> DeleteAsync(Guid reviewId, string userName)
         {
             try
             {
                 var review = await _reviewCollection.GetAsync(reviewId);
-                var result = review.Delete(userId);
+                var result = review.Delete(new User(userName));
                 if (result == Result.Sucess)
                 {
                     await _reviewCollection.UpsertAsync(review);
@@ -55,12 +50,12 @@ namespace Review.Application.Services
             return ReviewOperationResult.Error;
         }
 
-        public async Task<ReviewOperationResult> DislikeAsync(Guid reviewId, Guid userId)
+        public async Task<ReviewOperationResult> DislikeAsync(Guid reviewId, string userName)
         {
             try
             {
                 var review = await _reviewCollection.GetAsync(reviewId);
-                var result = review.Dislike(userId);
+                var result = review.Dislike(new User(userName));
                 if (result == Result.Sucess)
                 {
                     await _reviewCollection.UpsertAsync(review);
@@ -81,12 +76,12 @@ namespace Review.Application.Services
             return ReviewOperationResult.Error;
         }
 
-        public async Task<ReviewOperationResult> LikeAsync(Guid reviewId, Guid userId)
+        public async Task<ReviewOperationResult> LikeAsync(Guid reviewId, string userName)
         {
             try
             {
                 var review = await _reviewCollection.GetAsync(reviewId);
-                var result = review.Like(userId);
+                var result = review.Like(new User(userName));
                 if (result == Result.Sucess)
                 {
                     await _reviewCollection.UpsertAsync(review);
@@ -107,11 +102,19 @@ namespace Review.Application.Services
             return ReviewOperationResult.Error;
         }
 
-        public async Task<ReviewOperationResult> StoreAsync(Guid productId, Guid userId, string description)
+        public async Task<ReviewOperationResult> InsertAsync(string productCode, string userName, string description)
         {
             try
             {
-                var review = Domain.Entities.Review.Create(productId, userId, description);
+                var review = new Domain.Entities.Review(
+                    Guid.NewGuid(),
+                    new Product(productCode),
+                    new User(userName),
+                    description,
+                    Array.Empty<Like>(),
+                    Array.Empty<Dislike>(),
+                    _dateTimeProvider.Utc,
+                    true);
 
                 await _reviewCollection.UpsertAsync(review);
                 _metric.Track("Review:Stored");

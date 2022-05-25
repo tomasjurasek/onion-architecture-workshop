@@ -2,10 +2,9 @@
 {
     public interface IReviewFacade
     {
-        Task<ICollection<DTO.Review>> GetAsync(Guid productId);
-        Task<ReviewOperationResult> StoreAsync(Guid productId, Guid userId, string description);
-        Task<ReviewOperationResult> LikeAsync(Guid reviewId, Guid userId);
-        Task<ReviewOperationResult> DislikeAsync(Guid reviewId, Guid userId);
-        Task<ReviewOperationResult> DeleteAsync(Guid reviewId, Guid userId);
+        Task<ReviewOperationResult> InsertAsync(string productCode, string userName, string description);
+        Task<ReviewOperationResult> LikeAsync(Guid reviewId, string userName);
+        Task<ReviewOperationResult> DislikeAsync(Guid reviewId, string userName);
+        Task<ReviewOperationResult> DeleteAsync(Guid reviewId, string userName);
     }
 }

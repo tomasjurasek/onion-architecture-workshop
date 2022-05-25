@@ -12,4 +12,8 @@
 		<InternalsVisibleTo Include="Review.Infrastructure" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Dawn.Guard" Version="1.12.0" />
+	</ItemGroup>
+
 </Project>

@@ -2,6 +2,6 @@
 {
     public interface ILoggedUserProvider
     {
-        Guid UserId { get; }
+        string UserName { get; }
     }
 }

@@ -1,4 +1,16 @@
-﻿namespace Review.Domain.Entities
+﻿using Dawn;
+
+namespace Review.Domain.Entities
 {
-    internal record Like(Guid UserId, DateTime CreatedAt);
+    internal record Like
+    {
+        public Like(User user, DateTime createdAt)
+        {
+            User = Guard.Argument(user).NotNull();
+            CreatedAt = createdAt;
+        }
+
+        public User User { get; }
+        public DateTime CreatedAt { get; }
+    }
 }

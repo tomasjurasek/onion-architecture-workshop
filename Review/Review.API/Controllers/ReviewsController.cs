@@ -5,7 +5,7 @@ using Review.Application.Contracts;
 namespace Review.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("products/{code}")]
     public class ReviewsController : ControllerBase
     {
         private readonly ILogger<ReviewsController> _logger;
@@ -19,10 +19,10 @@ namespace Review.API.Controllers
             _loggedUserProvider = loggedUserProvider;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> StoreAsync([FromBody] StoreReviewRequest model)
+        [HttpPost("reviews")]
+        public async Task<IActionResult> InsertAsync(string code, [FromBody] ReviewInsertRequest model)
         {
-            var result = await _reviewService.StoreAsync(model.ProductId, _loggedUserProvider.UserId, model.Description);
+            var result = await _reviewService.InsertAsync(code, _loggedUserProvider.UserName, model.Description);
             if (result == ReviewOperationResult.Success)
             {
                 return Ok();
@@ -31,10 +31,10 @@ namespace Review.API.Controllers
             return new ContentResult { StatusCode = StatusCodes.Status500InternalServerError };
         }
 
-        [HttpDelete("{reviewId}")]
+        [HttpDelete("reviews/{reviewId}")]
         public async Task<IActionResult> DeleteAsync(Guid reviewId)
         {
-            var result = await _reviewService.DeleteAsync(reviewId, _loggedUserProvider.UserId);
+            var result = await _reviewService.DeleteAsync(reviewId, _loggedUserProvider.UserName);
             if (result == ReviewOperationResult.Success)
             {
                 return Ok();
@@ -48,10 +48,10 @@ namespace Review.API.Controllers
         }
 
 
-        [HttpPut("{reviewId/like}")]
+        [HttpPut("reviews/{reviewId}/like")]
         public async Task<IActionResult> LikeAsync(Guid reviewId)
         {
-            var result = await _reviewService.LikeAsync(reviewId, _loggedUserProvider.UserId);
+            var result = await _reviewService.LikeAsync(reviewId, _loggedUserProvider.UserName);
             if (result == ReviewOperationResult.Success)
             {
                 return Ok();
@@ -64,10 +64,10 @@ namespace Review.API.Controllers
             return new ContentResult { StatusCode = StatusCodes.Status500InternalServerError };
         }
 
-        [HttpPut("{reviewId/dislike}")]
+        [HttpPut("reviews/{reviewId}/dislike")]
         public async Task<IActionResult> DislikeAsync(Guid reviewId)
         {
-            var result = await _reviewService.DislikeAsync(reviewId, _loggedUserProvider.UserId);
+            var result = await _reviewService.DislikeAsync(reviewId, _loggedUserProvider.UserName);
             if (result == ReviewOperationResult.Success)
             {
                 return Ok();

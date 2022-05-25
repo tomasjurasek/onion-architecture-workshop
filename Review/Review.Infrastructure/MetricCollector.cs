@@ -1,4 +1,4 @@
-﻿using Review.Domain.Contracts;
+﻿using Review.Application.Contracts;
 
 namespace Review.Infrastructure
 {
@@ -6,7 +6,7 @@ namespace Review.Infrastructure
     {
         public void Track(string metricName)
         {
-            throw new NotImplementedException();
+            //TODO
         }
     }
 }

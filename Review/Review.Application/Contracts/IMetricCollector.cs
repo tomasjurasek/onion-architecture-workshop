@@ -1,4 +1,4 @@
-﻿namespace Review.Domain.Contracts
+﻿namespace Review.Application.Contracts
 {
     internal interface IMetricCollector
     {
