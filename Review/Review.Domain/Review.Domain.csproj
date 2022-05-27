@@ -7,9 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Review.Tests" />
 		<InternalsVisibleTo Include="Review.Application" />
 		<InternalsVisibleTo Include="Review.Infrastructure" />
+		<InternalsVisibleTo Include="Review.Tests" />
 	</ItemGroup>
 
 	<ItemGroup>

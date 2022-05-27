@@ -9,14 +9,14 @@ namespace Review.Tests.Domain
 
         [Theory]
         [InlineData("")]
-        public void Create_When_InputIsNotValid_Should_ThrowsArgumentException(string code)
+        public void Create_When_InputAreNotValid_Should_ThrowsArgumentException(string code)
         {
             Assert.Throws<ArgumentException>(() => new Product(code));
         }
 
         [Theory]
         [InlineData(null)]
-        public void Create_When_InputIsNotValid_Should_ThrowsArgumentNullException(string code)
+        public void Create_When_InputAreNotValid_Should_ThrowsArgumentNullException(string code)
         {
             Assert.Throws<ArgumentNullException>(() => new Product(code));
         }

@@ -4,12 +4,12 @@ using Xunit;
 
 namespace Review.Tests.Domain
 {
-    public class LikeTests
+    public class DislikeTests
     {
         [Fact]
         public void Create_When_InputAreNotValid_Should_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new Like(null, new DateTime(2021, 10, 1)));
+            Assert.Throws<ArgumentNullException>(() => new Dislike(null, new DateTime(2021, 10, 1)));
         }
     }
 }
